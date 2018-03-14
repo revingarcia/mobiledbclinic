@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "529766486121",
+    "firebase_url": "https://prescription-database.firebaseio.com",
+    "project_id": "prescription-database",
+    "storage_bucket": "prescription-database.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:529766486121:android:3db433acec4c6f1d",
+        "android_client_info": {
+          "package_name": "com.example.mp.clincdatabase"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "529766486121-rv8lleqcni47oll041pt1emk2lor87pf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAu0Un80wrK6PghxALsap22IM1EFCESokk"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

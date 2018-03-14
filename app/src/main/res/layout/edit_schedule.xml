@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:text="What portion do you want to edit?"
+            android:gravity="center"/>
+
+        <Button
+            android:id="@+id/prescriptions_edit"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:text="PRESCRIPTIONS"/>
+
+        <Button
+            android:id="@+id/date_edit"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:text="DATE"/>
+
+    </LinearLayout>
+
+
+</android.support.constraint.ConstraintLayout>
