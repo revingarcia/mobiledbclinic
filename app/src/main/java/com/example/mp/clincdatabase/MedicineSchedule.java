@@ -3,6 +3,7 @@ package com.example.mp.clincdatabase;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Canvas;
+import android.icu.text.AlphabeticIndex;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -16,6 +17,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 
@@ -33,8 +35,11 @@ public class MedicineSchedule extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private ScheduleAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
-    private ArrayList<Schedule> schedList;
+    private ArrayList<Alarm> schedList;
     private Button setSchedule;
+    private Button backBtn;
+    private CheckBox recordCheckbox;
+    private CheckBox appointmentCheckbox;
     private LinearLayout container;
 
     private EditText textIn;
@@ -44,7 +49,8 @@ public class MedicineSchedule extends AppCompatActivity {
     private DatabaseReference databaseReference = database.getReference();
     private DatabaseReference userDataReference;
 
-    private Schedule schedulesTemp;
+    private Records schedulesTemp;
+    private Appointment appointmentTemp;
 
     SwipeController swipeController = null;
 
@@ -53,45 +59,46 @@ public class MedicineSchedule extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.medicine_schedule);
 
+
+
         Intent intent1 = getIntent();
         user1 = intent1.getStringExtra("username");
+        recordCheckbox = (CheckBox) findViewById(R.id.recordCheck);
+        recordCheckbox.setChecked(true);
+        appointmentCheckbox = (CheckBox) findViewById(R.id.appointmentCheck);
+        appointmentCheckbox.setChecked(true);
         schedList = new ArrayList<>();
         mAdapter = new ScheduleAdapter(schedList, user1, this);
 
-        userDataReference = databaseReference.child("Users").child(user1);
-        userDataReference.addValueEventListener(new ValueEventListener() {
+        loadDatabase();
+
+        appointmentCheckbox.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                if(dataSnapshot.exists()){
-                    schedList.clear();
-                    for(DataSnapshot childSchedule: dataSnapshot.child("schedules").getChildren()){
-                        schedulesTemp = childSchedule.getValue(Schedule.class);
-                        schedList.add(schedulesTemp);
-                    }
-                    mAdapter.notifyDataSetChanged();
-                }
+            public void onClick(View view) {
+                loadDatabase();
             }
+        });
 
+        recordCheckbox.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onCancelled(DatabaseError databaseError) {
-
+            public void onClick(View view) {
+                loadDatabase();
             }
         });
 
 
         Log.i("MYACTIVITY", "Went here to the Medicine Schedule");
         mRecyclerView = (RecyclerView) findViewById(R.id.medsched_recycler_view);
-        setSchedule = (Button) findViewById(R.id.add_schedule);
 
-        setSchedule.setOnClickListener(new View.OnClickListener() {
+        backBtn = (Button) findViewById(R.id.prescriptionLayout_back);
+        backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MedicineSchedule.this, AddSchedule.class);
-                intent.putExtra("username", user1);
-                startActivity(intent);
+                finish();
             }
-
         });
+
+
 
         mRecyclerView.setHasFixedSize(true);
 
@@ -100,13 +107,27 @@ public class MedicineSchedule extends AppCompatActivity {
 
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         mRecyclerView.setAdapter(mAdapter);
-        /*
+
         swipeController = new SwipeController(new SwipeControllerActions() {
             @Override
             public void onRightClicked(int position) {
                 mAdapter.scheduleList.remove(position);
                 mAdapter.notifyItemRemoved(position);
                 mAdapter.notifyItemRangeChanged(position, mAdapter.getItemCount());
+                ArrayList<Records> recordHolder = new ArrayList<>();
+                ArrayList<Appointment> appointmentHolder = new ArrayList<>();
+                for(int i = 0; i < schedList.size(); i++){
+                    if(schedList.get(i) instanceof Records){
+                        recordHolder.add((Records)schedList.get(i));
+                    }
+                    else if(schedList.get(i) instanceof Appointment){
+                        appointmentHolder.add((Appointment)schedList.get(i));
+                    }
+                }
+
+                userDataReference = databaseReference.child("Users").child(user1);
+                userDataReference.child("appointments").setValue(appointmentHolder);
+                userDataReference.child("records").setValue(recordHolder);
             }
         });
 
@@ -119,7 +140,37 @@ public class MedicineSchedule extends AppCompatActivity {
                 swipeController.onDraw(c);
             }
         });
-        */
 
+
+    }
+
+    public void loadDatabase(){
+        userDataReference = databaseReference.child("Users").child(user1);
+        userDataReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if(dataSnapshot.exists()){
+                    schedList.clear();
+                    if(dataSnapshot.child("records").exists() && recordCheckbox.isChecked()) {
+                        for (DataSnapshot childSchedule : dataSnapshot.child("records").getChildren()) {
+                            schedulesTemp = childSchedule.getValue(Records.class);
+                            schedList.add(schedulesTemp);
+                        }
+                    }
+                    if(dataSnapshot.child("appointments").exists() && appointmentCheckbox.isChecked()){
+                        for(DataSnapshot childAppointment: dataSnapshot.child("appointments").getChildren()){
+                            appointmentTemp = childAppointment.getValue(Appointment.class);
+                            schedList.add(appointmentTemp);
+                        }
+                    }
+                    mAdapter.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 }

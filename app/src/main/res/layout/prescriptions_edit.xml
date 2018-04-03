@@ -11,20 +11,14 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:text="What portion do you want to edit?"
+            android:text="What do you want to todo?"
             android:gravity="center"/>
 
         <Button
-            android:id="@+id/prescriptions_edit"
+            android:id="@+id/add_new_prescription"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:text="PRESCRIPTIONS"/>
-
-        <Button
-            android:id="@+id/date_edit"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:text="DATE"/>
+            android:text="ADD PRESCRIPTION"/>
         <Button
             android:id="@+id/alarm_edit"
             android:layout_width="match_parent"
@@ -32,6 +26,5 @@
             android:text="Alarm Schedule"/>
 
     </LinearLayout>
-
 
 </android.support.constraint.ConstraintLayout>

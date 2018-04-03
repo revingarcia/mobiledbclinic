@@ -26,6 +26,7 @@
         <activity android:name=".AppointmentList"/>
         <activity android:name=".AddAppointment"/>
         <activity android:name=".RecordView" />
+        <activity android:name=".PrescriptionAlarmAdd"/>
     </application>
 
 </manifest>

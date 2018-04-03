@@ -48,7 +48,7 @@ public class RecordView extends AppCompatActivity {
         prescript_name = (EditText) findViewById(R.id.prescript_name);
         prescript_contact = (EditText) findViewById(R.id.precrip_contact);
         prescript_physician = (EditText) findViewById(R.id.prescriped_physician);
-
+/*
         userDataReference = databaseReference.child("Users").child(user);
         userDataReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -58,7 +58,7 @@ public class RecordView extends AppCompatActivity {
                     prescript_name.setText(users1.getFname());
                     prescript_contact.setText(users1.getContact());
                     prescript_physician.setText(users1.getRecords().get(pos).getPhysician());
-                    startTable(users1.getRecords().get(pos));
+                    //startTable(users1.getRecords().get(pos));
                 }
             }
 
@@ -67,12 +67,13 @@ public class RecordView extends AppCompatActivity {
 
             }
         });
+        */
 
 
 
 
     }
-
+/*
     public void startTable(Records record){
         TableLayout stk = (TableLayout) findViewById(R.id.table_prescriptino);
         TableRow tbrow0 = new TableRow(this);
@@ -124,5 +125,5 @@ public class RecordView extends AppCompatActivity {
             stk.addView(tbrow);
         }
     }
-
+*/
 }

@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -27,6 +28,7 @@ public class AppointmentList extends AppCompatActivity {
     private RecyclerView.LayoutManager mLayoutManager;
     private ArrayList<Appointment> schedList;
     private Button setSchedule;
+    private Button backBtn;
     private LinearLayout container;
 
     private EditText textIn;
@@ -41,7 +43,7 @@ public class AppointmentList extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.medicine_schedule);
+        setContentView(R.layout.appointment_list);
 
         Intent intent1 = getIntent();
         user1 = intent1.getStringExtra("username");
@@ -54,11 +56,16 @@ public class AppointmentList extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if(dataSnapshot.exists()){
                     schedList.clear();
-                    for(DataSnapshot childSchedule: dataSnapshot.child("appointments").getChildren()){
-                        schedulesTemp = childSchedule.getValue(Appointment.class);
-                        schedList.add(schedulesTemp);
+                    if(dataSnapshot.child("appointments").exists()) {
+                        for (DataSnapshot childSchedule : dataSnapshot.child("appointments").getChildren()) {
+                            schedulesTemp = childSchedule.getValue(Appointment.class);
+                            schedList.add(schedulesTemp);
+                        }
+                        mAdapter.notifyDataSetChanged();
                     }
-                    mAdapter.notifyDataSetChanged();
+                    else{
+                        Toast.makeText(AppointmentList.this, "No Appointments yet, Please Make One", Toast.LENGTH_LONG).show();
+                    }
                 }
             }
 
@@ -82,6 +89,14 @@ public class AppointmentList extends AppCompatActivity {
                 mAdapter.notifyDataSetChanged();
             }
 
+        });
+
+        backBtn = (Button) findViewById(R.id.appointmentLayout_back);
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
         });
 
         mRecyclerView.setHasFixedSize(true);

@@ -27,14 +27,6 @@
             android:hint="Name of Medicine"
             android:inputType="textEmailAddress" />
 
-        <EditText
-            android:id="@+id/adFrequency"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:ems="10"
-            android:hint="Strenght and Frequency"
-            android:inputType="textEmailAddress" />
 
         <EditText
             android:id="@+id/addCondition"

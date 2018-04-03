@@ -3,42 +3,84 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:weightSum="7">
+        android:layout_height="60dp"
+        android:weightSum="4"
+        app:layout_constraintBottom_toTopOf="@+id/medsched_recycler_view">
 
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/medsched_recycler_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:scrollbars="vertical">
-
-        </android.support.v7.widget.RecyclerView>
-
-
-        <Button
-            android:id="@+id/add_schedule"
-            android:layout_width="match_parent"
-            android:layout_height="36dp"
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="Create Schedule"
-            app:layout_constraintBottom_toBottomOf="@id/medsched_recycler_view" />
+            android:text="Record"
+            android:textAlignment="center"
+            android:gravity="center"/>
+        <CheckBox
+            android:id="@+id/recordCheck"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"/>
 
-
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Appointment"
+            android:textAlignment="center"
+            android:gravity="center"/>
+        <CheckBox
+            android:id="@+id/appointmentCheck"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_gravity="center"/>
 
     </LinearLayout>
 
-    <android.support.constraint.Guideline
-        android:id="@+id/guideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_begin="20dp" />
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/medsched_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="vertical"
+        android:layout_marginBottom="60dp"
+        android:layout_marginTop="60dp"
+        app:layout_constraintBottom_toTopOf="@+id/prescriptionLayout"
+        app:layout_constraintLeft_toLeftOf="parent"
+        tools:layout_editor_absoluteY="-13dp"
+        tools:listitem="@layout/schedule_listrow">
+
+    </android.support.v7.widget.RecyclerView>
+
+
+    <LinearLayout
+        android:id="@+id/prescriptionLayout"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:weightSum="2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:orientation="horizontal"
+        android:padding="10dp">
+
+        <Button
+            android:id="@+id/prescriptionLayout_back"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="Back"
+            android:layout_weight="1"/>
+
+        <Button
+            android:id="@+id/prescriptionLayout_create"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="Create Record"
+            android:layout_weight="1"/>
+
+    </LinearLayout>
 
 
 </android.support.constraint.ConstraintLayout>

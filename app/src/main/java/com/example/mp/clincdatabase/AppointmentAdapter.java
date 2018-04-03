@@ -20,42 +20,21 @@ public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         private View mView;
-        private TextView schedDate;
-        private TextView schedPrescription;
+        private TextView alarmType;
+        private TextView alarmTimeDate;
 
         public ViewHolder(View itemView) {
             super(itemView);
             mView = itemView;
         }
 
-        public void setTexts(Appointment appointment){
-            schedDate = (TextView) mView.findViewById(R.id.dateSchedule);
-            schedPrescription = (TextView) mView.findViewById(R.id.datePrescription);
+        public void setTexts(String date, String description){
 
-            schedDate.setText(appointment.getDate());
-            schedPrescription.setText("Appointment with" + appointment.getPhysician() + "(" + appointment.getTime() +")");
+            alarmTimeDate = (TextView) mView.findViewById(R.id.tv_physician);
+            alarmType = (TextView) mView.findViewById(R.id.tv_description);
 
-
-            schedPrescription.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Toast.makeText(context, "Edit Function WIll be implemented in the Final Version", Toast.LENGTH_SHORT).show();
-                }
-            });
-
-
-            schedPrescription.setOnLongClickListener(new View.OnLongClickListener() {
-                @Override
-                public boolean onLongClick(View view) {
-                    Toast.makeText(context, "Delete Function WIll be implemented in the Final Version", Toast.LENGTH_SHORT).show();
-                    return false;
-                }
-            });
-            int pos = getAdapterPosition();
-            if(pos != RecyclerView.NO_POSITION){
-                Appointment clickedDataItem = scheduleList.get(pos);
-
-            }
+            alarmTimeDate.setText(date);
+            alarmType.setText(description);
         }
     }
 
@@ -67,14 +46,15 @@ public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.
 
     @Override
     public AppointmentAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.schedule_listrow, parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.prescription_list, parent,false);
 
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(AppointmentAdapter.ViewHolder holder, int position) {
-        holder.setTexts(scheduleList.get(position));
+        holder.setTexts("11/12/2039", "Appointment with" + scheduleList.get(position).getPhysician());
+
     }
 
 

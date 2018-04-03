@@ -30,7 +30,7 @@ public class Menu extends AppCompatActivity {
         btnPrescriptions.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Menu.this, MenuPrescriptions.class);
+                Intent intent = new Intent(Menu.this, PrescriptionList.class);
                 intent.putExtra("username", user);
                 startActivity(intent);
 

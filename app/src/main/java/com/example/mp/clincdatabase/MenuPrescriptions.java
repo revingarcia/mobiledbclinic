@@ -58,7 +58,7 @@ public class MenuPrescriptions extends AppCompatActivity{
                     public void onClick(View view) {
                         Toast.makeText(MenuPrescriptions.this, "Added a record", Toast.LENGTH_SHORT).show();
                         recordTempList.clear();
-                        if(!addPhysician.getText().toString().isEmpty()){
+                        if(!addPhysician.getText().toString().isEmpty()){ // if the text is not empty
                             recordTemp.setPhysician(addPhysician.getText().toString());
                             recordTempList.add(recordTemp);
 
@@ -66,14 +66,14 @@ public class MenuPrescriptions extends AppCompatActivity{
                             userDataReference.addListenerForSingleValueEvent(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(DataSnapshot dataSnapshot) {
-                                    if(dataSnapshot.exists()){
+                                    if(dataSnapshot.exists()){ //if a child node/key "records" already exist
                                         Records recordTempo;
-                                        for(DataSnapshot childRecord: dataSnapshot.getChildren()){
+                                        for(DataSnapshot childRecord: dataSnapshot.getChildren()){ //add all the records from the firebase to the arraylist
                                             recordTempo = childRecord.getValue(Records.class);
                                             recordTempList.add(recordTempo);
                                         }
 ;
-                                        userDataReference.setValue(recordTempList);
+                                        userDataReference.setValue(recordTempList); // then update the firebase
 
                                     }
                                     else{

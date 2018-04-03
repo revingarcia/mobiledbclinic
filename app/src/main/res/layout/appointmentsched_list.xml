@@ -1,78 +1,115 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Select Date and Time"
+        android:gravity="center"
+        android:textSize="30dp"
+        app:layout_constraintBottom_toTopOf="@id/inputDateTime" />
+
+    <LinearLayout
+        android:id="@+id/inputDateTime"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:paddingBottom="20dp"
+        android:paddingTop="20dp"
+        android:weightSum="2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.399">
+
+        <EditText
+            android:id="@+id/dateInputAppointment"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:hint="DATE"
+            android:textSize="20dp" />
+
+        <EditText
+            android:id="@+id/timeInputAppointment"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:hint="TIME"
+            android:textSize="20dp" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/inputPhysicianAppointment"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:paddingBottom="20dp"
+        android:paddingTop="20dp"
+        android:weightSum="2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/inputDateTime">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Physician"
+            android:textSize="30dp" />
+
+        <EditText
+            android:id="@+id/apptPhysician"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:hint="PHYSICIAN"
+            android:textSize="15dp" />
+
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:orientation="horizontal"
-            android:weightSum="2">
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="Date"
-                android:textSize="30dp"/>
-            <EditText
-                android:id="@+id/apptDate"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:hint="MONTH DAY , YEAR (DAY OF WEEK)"
-                android:textSize="11dp"/>
-        </LinearLayout>
+        android:layout_height="60dp"
+        android:weightSum="2"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:paddingRight="20dp"
+        android:paddingLeft="20dp"
+        app:layout_constraintTop_toBottomOf="@+id/inputPhysicianAppointment">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:orientation="horizontal"
-            android:weightSum="2">
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="Time"
-                android:textSize="30dp"/>
-            <EditText
-                android:id="@+id/apptTime"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:hint="Time"
-                android:textSize="11dp"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:orientation="horizontal"
-            android:weightSum="2">
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="Physician"
-                android:textSize="30dp"/>
-            <EditText
-                android:id="@+id/apptPhysciain"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:hint="Physcian"
-                android:textSize="11dp"/>
-        </LinearLayout>
+        <Button
+            android:id="@+id/backBtn"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Back"/>
 
         <Button
             android:id="@+id/btnAddAppt"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:text="Add Appointment"/>
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Set Appointment"
+            app:layout_constraintTop_toBottomOf="@+id/inputPhysicianAppointment"/>
+
 
     </LinearLayout>
+
+
+
 
 </android.support.constraint.ConstraintLayout>

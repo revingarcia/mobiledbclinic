@@ -6,13 +6,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/my_recycler_view"
-        android:scrollbars="vertical"
+        android:id="@+id/medsched_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:scrollbars="vertical"
         android:layout_marginBottom="60dp"
         app:layout_constraintBottom_toTopOf="@+id/prescriptionLayout"
-        tools:listitem="@layout/prescription_list" />
+        app:layout_constraintLeft_toLeftOf="parent"
+        tools:layout_editor_absoluteY="-13dp"
+        tools:listitem="@layout/prescription_list">
+
+    </android.support.v7.widget.RecyclerView>
+
 
     <LinearLayout
         android:id="@+id/prescriptionLayout"
@@ -24,20 +29,19 @@
         android:padding="10dp">
 
         <Button
-            android:id="@+id/prescriptionLayout_back"
+            android:id="@+id/appointmentLayout_back"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:text="Back"
             android:layout_weight="1"/>
 
         <Button
-            android:id="@+id/prescriptionLayout_create"
+            android:id="@+id/add_schedule"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:text="Create Record"
+            android:text="Create Appointment"
             android:layout_weight="1"/>
 
     </LinearLayout>
-
 
 </android.support.constraint.ConstraintLayout>

@@ -47,7 +47,7 @@ public class Login extends AppCompatActivity{
                             if(dataSnapshot.exists()) {
                                 Log.i("DATAA WAS PRESENT", "went in here" + loginUser.getText().toString());
                                 Toast.makeText(Login.this, "The Login and Password does not match", Toast.LENGTH_SHORT);
-                                userDataReference = databaseReference.child("Users");
+                                userDataReference = databaseReference.child("Users"); //userDataReference is the Firebase Reference and "Users" is the key
                                 userDataReference.orderByChild("password").equalTo(loginPass.getText().toString()).addListenerForSingleValueEvent(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(DataSnapshot dataSnapshot) {
