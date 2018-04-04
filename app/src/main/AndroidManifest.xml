@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.mp.clincdatabase">
 
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -27,6 +30,15 @@
         <activity android:name=".AddAppointment"/>
         <activity android:name=".RecordView" />
         <activity android:name=".PrescriptionAlarmAdd"/>
+        <activity android:name=".AlarmNotif"/>
+        <!--  Declare  Alarm Broadcast receiver here  -->
+        <receiver android:name=".AlarmReceiver" />
+
+        <!--  Declare  Alarm Notification Service here  -->
+        <service android:name=".AlarmNotificationService" />
+
+        <!--  Declare  Alarm Sound Service here  -->
+        <service android:name=".AlarmSoundService" />
     </application>
 
 </manifest>
