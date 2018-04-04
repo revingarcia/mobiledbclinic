@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#bf3636">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/my_recycler_view"
@@ -28,14 +29,18 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:text="Back"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:textColor="#ffff"
+            android:background="@drawable/mybutton"/>
 
         <Button
             android:id="@+id/prescriptionLayout_create"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:text="Create Record"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:textColor="#ffff"
+            android:background="@drawable/mybutton"/>
 
     </LinearLayout>
 

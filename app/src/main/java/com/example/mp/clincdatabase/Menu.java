@@ -2,10 +2,12 @@ package com.example.mp.clincdatabase;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 
@@ -16,6 +18,12 @@ public class Menu extends AppCompatActivity {
     private Button btnIntakeSched;
     private Button btnDoctors;
     private Button btnNotif;
+    private ImageView imageSchedule;
+    private ImageView imageAppointment;
+    private ImageView imagePresciption;
+    private ConstraintLayout layoutSchedule;
+    private ConstraintLayout layoutPrescription;
+    private ConstraintLayout layoutAppiontment;
 
     @Override
     public void onCreate(Bundle savedInstanceState){
@@ -27,7 +35,9 @@ public class Menu extends AppCompatActivity {
         final String user = intent1.getStringExtra("username");
         Log.i("MYACTIVITY", "Went to the Menu CLass");
         btnPrescriptions = (Button) findViewById(R.id.btnPrescription);
-        btnPrescriptions.setOnClickListener(new View.OnClickListener() {
+        imagePresciption = (ImageView) findViewById(R.id.imagePrescription);
+        layoutPrescription = (ConstraintLayout) findViewById(R.id.layoutPrescriptions);
+        layoutPrescription.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Menu.this, PrescriptionList.class);
@@ -54,6 +64,7 @@ public class Menu extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        /*
         btnNotif = (Button) findViewById(R.id.btnNotif);
         btnNotif.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,6 +72,7 @@ public class Menu extends AppCompatActivity {
                 Toast.makeText(Menu.this, "Functino is still not available", Toast.LENGTH_SHORT).show();
             }
         });
+        */
 
     }
 }

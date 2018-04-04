@@ -75,10 +75,11 @@
             android:id="@+id/lin_text">
 
             <TextView
+                android:id="@+id/textGlo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="Time to Check Your Blood Sugar!"
+                android:text="Please check"
                 android:textColor="?attr/colorAccent"
                 android:textSize="16dp" />
 

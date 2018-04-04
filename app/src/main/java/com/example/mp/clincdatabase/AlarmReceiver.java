@@ -31,16 +31,22 @@ public class AlarmReceiver extends WakefulBroadcastReceiver {
         startWakefulService(context, (intent.setComponent(comp)));
         Log.d("Dumaan", "daan"); */
 
+        String temp = intent.getStringExtra("type");
+        String temp1 = intent.getStringExtra("physician");
+        Log.i("CHECK", temp);
+
         // TODO: This method is called when the BroadcastReceiver is receiving
-        startAlarmService(context);
+        startAlarmService(context, temp, temp1);
 
 
     }
 
-    public void startAlarmService(Context context){
+    public void startAlarmService(Context context, String temp, String temp1){
         Log.wtf("RECEIVER", "RECEIVED THE ACTION");
 
         Intent intentNext = new Intent(context, AlarmNotificationService.class);
+        intentNext.putExtra("type", temp);
+        intentNext.putExtra("physician", temp1);
         //intentNext.putExtra(Schedule.TABLE, schedule);
         startWakefulService(context, intentNext);
     }

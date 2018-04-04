@@ -41,6 +41,7 @@ public class AlarmNotif extends AppCompatActivity {
     private Ringtone r;
     private Vibrator v;
     private GlowPadView glowPad;
+    private TextView textGlo;
     Handler handler;
     Runnable autoCloser;
 
@@ -52,6 +53,9 @@ public class AlarmNotif extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.alarmnotif);
+        Intent intent = getIntent();
+        String type = intent.getStringExtra("type");
+        String physician = intent.getStringExtra("physician");
         Log.d("ALARM NOTIF", "AFTER Alarm NOtIF");
         Uri alarmTone = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
         r = RingtoneManager.getRingtone(getApplicationContext(), alarmTone);
@@ -59,6 +63,8 @@ public class AlarmNotif extends AppCompatActivity {
         Log.d("ALARMNOTIF:", "Pumasok sa Alarm Notif");
         AudioManager audioManager = (AudioManager) getBaseContext().getSystemService(Context.AUDIO_SERVICE);
         glowPad = (GlowPadView) findViewById(R.id.gpv_alarm_medicine);
+        textGlo = (TextView) findViewById(R.id.textGlo);
+        textGlo.setText("Your" + type  + "with" + physician);
         userRingerMode = audioManager.getRingerMode();
 
         int volume = audioManager.getStreamMaxVolume(AudioManager.STREAM_ALARM);

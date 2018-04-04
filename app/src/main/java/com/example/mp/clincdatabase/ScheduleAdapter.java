@@ -79,7 +79,6 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ViewHo
                     if(isonCheck.isChecked()) {
                         scheduleList.get(getAdapterPosition()).setOn(true);
 
-
                         int hourOfUser = scheduleList.get(getAdapterPosition()).getHour();
                         int minuteOfUser = scheduleList.get(getAdapterPosition()).getMinutes();
                         Calendar calendar = Calendar.getInstance();
@@ -93,10 +92,14 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ViewHo
                         Log.d("CHECK MINUTE U: ", String.valueOf(minuteOfUser));
                                      /* Retrieve a PendingIntent that will perform a broadcast */
                         Intent alarmIntent = new Intent(context, AlarmReceiver.class);
-                        if(scheduleList.get(getAdapterPosition()) instanceof Records)
+                        if(scheduleList.get(getAdapterPosition()) instanceof Records) {
                             alarmIntent.putExtra("type", "Record");
-                        else
+                            alarmIntent.putExtra("physician", ((Records) scheduleList.get(getAdapterPosition())).getPhysician());
+                        }
+                        else {
                             alarmIntent.putExtra("type", "Appointment");
+                            alarmIntent.putExtra("physician", ((Appointment) scheduleList.get(getAdapterPosition())).getPhysician());
+                        }
                         pendingIntent = PendingIntent.getBroadcast(context, ALARM_REQUEST_CODE, alarmIntent, 0);
                         int finalhour;
                         int finalminute;
@@ -208,160 +211,11 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ViewHo
             if(scheduleList.get(position).getAm_pm().equalsIgnoreCase("PM"))
                 holder.setTexts("Records", (scheduleList.get(position).getHour()-12) + ":" + scheduleList.get(position).getMinutes(), scheduleList.get(position).getAm_pm(),((Records) scheduleList.get(position)).getPhysician(), scheduleList.get(position).isOn());
             else
-                holder.setTexts("Records", (scheduleList.get(position).getHour()-12) + ":" + scheduleList.get(position).getMinutes(), scheduleList.get(position).getAm_pm(),((Records) scheduleList.get(position)).getPhysician(), scheduleList.get(position).isOn());
+                holder.setTexts("Records", (scheduleList.get(position).getHour()) + ":" + scheduleList.get(position).getMinutes(), scheduleList.get(position).getAm_pm(),((Records) scheduleList.get(position)).getPhysician(), scheduleList.get(position).isOn());
         }
         else if(scheduleList.get(position) instanceof Appointment){
             holder.setTexts("Appointment",((Appointment) scheduleList.get(position)).getDateMonth() + "/" + ((Appointment) scheduleList.get(position)).getDateDay() + "/" + ((Appointment) scheduleList.get(position)).getDateYear(), (scheduleList.get(position).getHour()-12) + ":" + scheduleList.get(position).getMinutes() + " " + scheduleList.get(position).getAm_pm(),"Appointment with" + ((Appointment) scheduleList.get(position)).getPhysician(), scheduleList.get(position).isOn());
         }
-
-        holder.mView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                final int pos = position;
-                final String posString = Integer.toString(pos);
-                final AlertDialog.Builder mBuilder = new AlertDialog.Builder(context);
-                View dialogView = LayoutInflater.from(context).inflate(R.layout.edit_schedule, null);
-                Button editPrescriptions = (Button) dialogView.findViewById(R.id.prescriptions_edit);
-                Button editDate = (Button) dialogView.findViewById(R.id.date_edit);
-                Button editAlarm = (Button) dialogView.findViewById(R.id.alarm_edit);
-
-                mBuilder.setView(dialogView);
-                final AlertDialog dialog = mBuilder.create();
-                dialog.show();
-                editPrescriptions.setOnClickListener(new View.OnClickListener(){
-
-                    @Override
-                    public void onClick(View view) {
-                        dialog.dismiss();
-                        AlertDialog.Builder miniBuilder = new AlertDialog.Builder(context);
-                        final View miniView = LayoutInflater.from(context).inflate(R.layout.edit_schedule_prescription, null);
-                        final LinearLayout miniLayout = miniView.findViewById(R.id.layout_prescriptions);
-                        Button editPrescriptionSched = (Button) miniView.findViewById(R.id.editPrescriptionData);
-                        userDataReference = databaseReference.child("Users").child(user).child("schedules").child(posString);
-                        userDataReference.addValueEventListener(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(DataSnapshot dataSnapshot) {
-
-                                Schedule scheduletemp = dataSnapshot.getValue(Schedule.class);
-                                for(int i = 0; i < scheduletemp.getPrescriptions().size(); i++) {
-                                    String tempSched = scheduletemp.getPrescriptions().get(i);
-                                    LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                                    final View rowView = layoutInflater.inflate(R.layout.row_prescription, null);
-                                    EditText textOut = (EditText) rowView.findViewById(R.id.editTextPrestcription);
-                                    textOut.setText(tempSched);
-                                    textOut.setFocusable(true);
-                                    miniLayout.addView(rowView);
-
-                                }
-                            }
-
-                            @Override
-                            public void onCancelled(DatabaseError databaseError) {
-
-                            }
-                        });
-
-
-                        miniBuilder.setView(miniView);
-                        final AlertDialog dialogTrial = miniBuilder.create();
-                       // dialogTrial.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
-                        dialogTrial.show();
-                        dialogTrial.getWindow().clearFlags( WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE |WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
-                        dialogTrial.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
-                        editPrescriptionSched.setOnClickListener(new View.OnClickListener(){
-
-                            @Override
-                            public void onClick(View view) {
-                                ArrayList<String> presTemp = new ArrayList<>();
-                                int childCount = miniLayout.getChildCount();
-                                for(int i = 0; i<childCount; i++){
-
-                                    View thisChild = miniLayout.getChildAt(i);
-                                    EditText edittemp = (EditText) thisChild.findViewById(R.id.editTextPrestcription);
-                                    presTemp.add(edittemp.getText().toString());
-
-                                }
-
-                               // scheduleList.get(pos).setPrescriptions(presTemp);
-                                userDataReference = databaseReference.child("Users").child(user).child("schedules");
-                                userDataReference.setValue(scheduleList);
-                                notifyDataSetChanged();
-                                dialogTrial.dismiss();
-
-                            }
-                        });
-                    }
-                });
-
-
-                editAlarm.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        dialog.dismiss();
-                        final AlertDialog.Builder mBuilder = new AlertDialog.Builder(context);
-                        View dialogView = LayoutInflater.from(context).inflate(R.layout.edit_schedule_alarm, null);
-                        LinearLayout prescription_container = (LinearLayout) dialogView.findViewById(R.id.container_prescription_alarm);
-                        Button prescription_alarm = (Button) dialogView.findViewById(R.id.prescription_alarm);
-                        /*
-                        for(int i=0; i < scheduleList.get(position).getPrescriptions().size(); i++){
-                            LayoutInflater layoutInflater =
-                                    (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                            final View AddView = layoutInflater.inflate(R.layout.edit_schedule_alarm_row, null);
-                            TextView prescriptionAlarm = (TextView) AddView.findViewById(R.id.alarmPrescription);
-                            prescriptionAlarm.setText(scheduleList.get(position).getPrescriptions().get(i).toString());
-                            prescription_container.addView(AddView);
-                        }
-                        */
-                        mBuilder.setView(dialogView);
-                        final AlertDialog dialog = mBuilder.create();
-                        dialog.show();
-
-                        prescription_alarm.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-
-                            }
-                        });
-                    }
-                });
-
-            }
-        });
-
-        holder.mView.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View view) {
-                final AlertDialog.Builder mBuilder = new AlertDialog.Builder(context);
-                View dialogView = LayoutInflater.from(context).inflate(R.layout.continue_back, null);
-                Button continueButton = (Button) dialogView.findViewById(R.id.continue_button);
-                Button backButton = (Button) dialogView.findViewById(R.id.no_button);
-
-                mBuilder.setView(dialogView);
-                final AlertDialog dialog = mBuilder.create();
-                dialog.show();
-                continueButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        final int pos = position;
-                        final String posString = Integer.toString(pos);
-                        userDataReference = databaseReference.child("Users").child(user).child("schedules").child(posString);
-                        //userDataReference.setValue(null);
-                        userDataReference.setValue(null);
-                        scheduleList.remove(pos);
-                        notifyDataSetChanged();
-                        dialog.dismiss();
-                    }
-                });
-                backButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        dialog.dismiss();
-                    }
-                });
-
-                return false;
-            }
-        });
     }
 
     @Override

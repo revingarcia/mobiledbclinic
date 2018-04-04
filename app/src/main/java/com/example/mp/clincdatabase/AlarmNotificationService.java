@@ -42,7 +42,11 @@ public class AlarmNotificationService extends IntentService {
     public void onHandleIntent(Intent intent) {
 
         //Send notification
+        String temp = intent.getStringExtra("type");
+        String temp1 = intent.getStringExtra("physician");
         Intent in = new Intent(getBaseContext(), AlarmNotif.class);
+        in.putExtra("type", temp);
+        in.putExtra("physician", temp1);
         in.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         in.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
         startActivity(in);

@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -43,6 +44,7 @@ public class PrescriptionAdapter extends RecyclerView.Adapter<PrescriptionAdapte
             private View mView;
             private TextView mTextView;
             private TextView description;
+            private ImageView image;
         public ViewHolder(View v) {
             super(v);
             mView = v;
@@ -71,7 +73,7 @@ public class PrescriptionAdapter extends RecyclerView.Adapter<PrescriptionAdapte
         public void setName(String prescName, String num){
             mTextView = mView.findViewById(R.id.tv_physician);
             description = mView.findViewById(R.id.tv_description);
-
+            image = mView.findViewById(R.id.imageArrow);
             mTextView.setText(prescName);
             description.setText(num);
 

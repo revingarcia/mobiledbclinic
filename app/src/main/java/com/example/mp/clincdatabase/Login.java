@@ -25,6 +25,7 @@ public class Login extends AppCompatActivity{
     private EditText loginPass;
 
     private Button btnLogin;
+    private Button btnRegister;
     private String TAG = "MYACTIVITY";
 
     @Override
@@ -57,6 +58,7 @@ public class Login extends AppCompatActivity{
                                             Intent intent = new Intent(Login.this, Menu.class);
                                             String user = loginUser.getText().toString();
                                             intent.putExtra("username", user);
+                                            Toast.makeText(Login.this, "Welcome" + user, Toast.LENGTH_LONG).show();
                                             startActivity(intent);
 
                                         }
@@ -87,6 +89,15 @@ public class Login extends AppCompatActivity{
                     Toast.makeText(Login.this,
                             "Please fill in the blanks", Toast.LENGTH_SHORT).show();
                 }
+            }
+        });
+
+        btnRegister = (Button) findViewById(R.id.btnRegister);
+        btnRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Login.this, Register.class);
+                startActivity(intent);
             }
         });
     }

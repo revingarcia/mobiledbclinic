@@ -30,6 +30,7 @@ public class Register extends AppCompatActivity{
     private String TAG = "MYACTIVITY";
 
     private Button btnReg;
+    private Button btnBack;
 
 
     private Users users;
@@ -91,6 +92,13 @@ public class Register extends AppCompatActivity{
                     Toast.makeText(Register.this,
                             "Please fill in the blanks", Toast.LENGTH_SHORT).show();
                 }
+            }
+        });
+        btnBack = (Button) findViewById(R.id.btnBack);
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
             }
         });
     }

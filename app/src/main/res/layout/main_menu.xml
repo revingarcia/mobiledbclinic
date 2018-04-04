@@ -1,43 +1,115 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#bf3636">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginLeft="50dp"
-        android:layout_marginRight="50dp"
-        android:layout_marginTop="100dp"
-        android:layout_marginBottom="100dp"
-        android:weightSum="4"
-        android:orientation="vertical">
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/layoutPrescriptions"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="64dp"
+        android:background="#c8781818"
+        android:orientation="vertical"
+        android:paddingTop="20dp"
+        android:text="Prescriptions"
+        android:textColor="#ffff"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/layoutSchedule">
+
+
+        <ImageView
+            android:id="@+id/imagePrescription"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:src="@drawable/prescriptionsimg" />
 
         <Button
             android:id="@+id/btnPrescription"
+            style="@style/Widget.AppCompat.Button"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="Prescriptions"/>
+            android:layout_height="wrap_content"
+            android:background="#00781818"
+            android:text="Prescriptions"
+            android:textColor="#ffff"
+            app:layout_constraintTop_toBottomOf="@+id/imagePrescription"/>
+
+    </android.support.constraint.ConstraintLayout>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/layoutSchedule"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
+        android:layout_marginBottom="264dp"
+        android:layout_marginRight="48dp"
+        android:background="#c8781818"
+        android:orientation="vertical"
+        android:text="Prescriptions"
+        android:textColor="#ffff"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.122"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent">
+
+        <ImageView
+            android:id="@+id/imageViewSched"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/scheduleimg"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            tools:layout_editor_absoluteY="0dp" />
+
         <Button
             android:id="@+id/btnIntakeSched"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="Medicine Intake Schedule"/>
+            android:layout_height="wrap_content"
+            android:background="#00781818"
+            android:text="Schedule"
+            android:textColor="#ffff"
+            app:layout_constraintTop_toBottomOf="@+id/imageViewSched" />
+
+    </android.support.constraint.ConstraintLayout>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/layoutAppintment"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="64dp"
+        android:background="#c8781818"
+        android:orientation="vertical"
+        android:paddingTop="20dp"
+        android:text="Prescriptions"
+        android:textColor="#ffff"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/layoutSchedule">
+
+        <ImageView
+            android:id="@+id/imgappointment"
+            android:layout_width="match_parent"
+            android:layout_height="77dp"
+            android:src="@drawable/appointmentimg"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            tools:layout_editor_absoluteY="0dp" />
+
         <Button
             android:id="@+id/btnDoctors"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="Doctor's Appointment"/>
-        <Button
-            android:id="@+id/btnNotif"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="Notification"/>
+            android:layout_height="wrap_content"
+            android:background="#00781818"
+            android:text="Appointments"
+            android:textColor="#ffff"
+            app:layout_constraintTop_toBottomOf="@id/imgappointment" />
 
-    </LinearLayout>
+
+    </android.support.constraint.ConstraintLayout>
+
+
 
 </android.support.constraint.ConstraintLayout>
