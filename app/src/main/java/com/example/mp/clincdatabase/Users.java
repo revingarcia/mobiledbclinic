@@ -12,12 +12,13 @@ public class Users {
     private String userID;
     private String contact;
     private ArrayList<Records> records;
+    private ArrayList<Appointment> appointments;
 
     public Users(){
 
     }
 
-    public Users(String fname, String birthday, String contact, String password, String username, String userID, ArrayList<Records> records) {
+    public Users(String fname, String birthday, String contact, String password, String username, String userID, ArrayList<Records> records, ArrayList<Appointment> appointments) {
         this.Fname = fname;
         this.birthday = birthday;
         this.contact = contact;
@@ -25,6 +26,7 @@ public class Users {
         this.username = username;
         this.userID = userID;
         this.records = records;
+        this.appointments = appointments;
     }
 
     public String getContact() { return contact; }
@@ -66,4 +68,11 @@ public class Users {
 
     public void setRecords(ArrayList<Records> records) { this.records = records; }
 
+    public ArrayList<Appointment> getAppointments() {
+        return appointments;
+    }
+
+    public void setAppointments(ArrayList<Appointment> appointments) {
+        this.appointments = appointments;
+    }
 }

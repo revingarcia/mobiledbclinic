@@ -4,7 +4,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#FFBF3636">
 
 
     <TextView
@@ -13,6 +14,7 @@
         android:text="Select Date and Time"
         android:gravity="center"
         android:textSize="30dp"
+        android:textColor="#ffff"
         app:layout_constraintBottom_toTopOf="@id/inputDateTime" />
 
     <LinearLayout
@@ -36,7 +38,8 @@
             android:layout_weight="1"
             android:gravity="center"
             android:hint="DATE"
-            android:textSize="20dp" />
+            android:textSize="20dp"
+            android:textColor="#ffff"/>
 
         <EditText
             android:id="@+id/timeInputAppointment"
@@ -45,7 +48,8 @@
             android:layout_weight="1"
             android:gravity="center"
             android:hint="TIME"
-            android:textSize="20dp" />
+            android:textSize="20dp"
+            android:textColor="#ffff"/>
     </LinearLayout>
 
 
@@ -67,7 +71,8 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="Physician"
-            android:textSize="30dp" />
+            android:textSize="30dp"
+            android:textColor="#ffff"/>
 
         <EditText
             android:id="@+id/apptPhysician"
@@ -77,7 +82,8 @@
             android:layout_weight="1"
             android:gravity="center"
             android:hint="PHYSICIAN"
-            android:textSize="15dp" />
+            android:textSize="15dp"
+            android:textColor="#ffff"/>
 
     </LinearLayout>
 
@@ -96,7 +102,8 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="Back"/>
+            android:text="Back"
+            android:background="@drawable/mybutton"/>
 
         <Button
             android:id="@+id/btnAddAppt"
@@ -104,6 +111,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="Set Appointment"
+            android:background="@drawable/mybutton"
             app:layout_constraintTop_toBottomOf="@+id/inputPhysicianAppointment"/>
 
 

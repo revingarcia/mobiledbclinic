@@ -110,7 +110,7 @@ public class MedicineSchedule extends AppCompatActivity {
 
         swipeController = new SwipeController(new SwipeControllerActions() {
             @Override
-            public void onRightClicked(int position) {
+            public void onLeftClicked(int position) {
                 mAdapter.scheduleList.remove(position);
                 mAdapter.notifyItemRemoved(position);
                 mAdapter.notifyItemRangeChanged(position, mAdapter.getItemCount());
@@ -129,7 +129,7 @@ public class MedicineSchedule extends AppCompatActivity {
                 userDataReference.child("appointments").setValue(appointmentHolder);
                 userDataReference.child("records").setValue(recordHolder);
             }
-        });
+        }, MedicineSchedule.this);
 
         ItemTouchHelper itemTouchhelper = new ItemTouchHelper(swipeController);
         itemTouchhelper.attachToRecyclerView(mRecyclerView);

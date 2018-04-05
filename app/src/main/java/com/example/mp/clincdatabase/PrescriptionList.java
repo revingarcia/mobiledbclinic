@@ -2,11 +2,13 @@ package com.example.mp.clincdatabase;
 
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.graphics.Canvas;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -38,6 +40,7 @@ public class PrescriptionList extends AppCompatActivity {
     private ArrayList<Records> recordTempList;
     private Records recordTemp;
 
+    SwipeController swipeController = null;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -96,6 +99,29 @@ public class PrescriptionList extends AppCompatActivity {
         mRecyclerView.setAdapter(mAdapter);
         Log.i("MYACTIVTY", prescripList.size() + "WAHH");
 
+
+        swipeController = new SwipeController(new SwipeControllerActions() {
+            @Override
+            public void onLeftClicked(int position) {
+                mAdapter.prescriptionList.remove(position);
+                mAdapter.notifyItemRemoved(position);
+                mAdapter.notifyItemRangeChanged(position, mAdapter.getItemCount());
+
+                userDataReference = databaseReference.child("Users").child(user);
+                userDataReference.child("records").setValue(mAdapter.prescriptionList);
+            }
+        }, PrescriptionList.this);
+
+        ItemTouchHelper itemTouchhelper = new ItemTouchHelper(swipeController);
+        itemTouchhelper.attachToRecyclerView(mRecyclerView);
+
+        mRecyclerView.addItemDecoration(new RecyclerView.ItemDecoration() {
+            @Override
+            public void onDraw(Canvas c, RecyclerView parent, RecyclerView.State state) {
+                swipeController.onDraw(c);
+            }
+        });
+
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -110,62 +136,6 @@ public class PrescriptionList extends AppCompatActivity {
                 Intent addRecordIntent = new Intent(PrescriptionList.this, PrescriptionAlarmAdd.class);
                 addRecordIntent.putExtra("username", user);
                 startActivity(addRecordIntent);
-
-
-                /*
-                AlertDialog.Builder mBuilder = new AlertDialog.Builder(PrescriptionList.this);
-                View dialogView = getLayoutInflater().inflate(R.layout.add_record, null);
-                final EditText addPhysician = (EditText) dialogView.findViewById(R.id.recordPhysician);
-                final Button record = (Button) dialogView.findViewById(R.id.btnAddRecord);
-
-                mBuilder.setView(dialogView);
-
-                final AlertDialog dialog = mBuilder.create();
-                dialog.show();
-                record.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Toast.makeText(PrescriptionList.this, "Added a record", Toast.LENGTH_SHORT).show();
-                        prescripList.clear();
-                        if(!addPhysician.getText().toString().isEmpty()){ // if the text is not empty
-                            recordTemp.setPhysician(addPhysician.getText().toString());
-                            recordTempList.add(recordTemp);
-
-                            userDataReference = databaseReference.child("Users").child(user).child("records");
-                            userDataReference.addListenerForSingleValueEvent(new ValueEventListener() {
-                                @Override
-                                public void onDataChange(DataSnapshot dataSnapshot) {
-                                    if(dataSnapshot.exists()){ //if a child node/key "records" already exist
-                                        Records recordTempo;
-                                        for(DataSnapshot childRecord: dataSnapshot.getChildren()){ //add all the records from the firebase to the arraylist
-                                            recordTempo = childRecord.getValue(Records.class);
-                                            recordTempList.add(recordTempo);
-                                        }
-                                        ;
-                                        userDataReference.setValue(recordTempList); // then update the firebase
-
-                                    }
-                                    else{
-                                        userDataReference.setValue(recordTempList);
-                                    }
-                                }
-
-                                @Override
-                                public void onCancelled(DatabaseError databaseError) {
-
-                                }
-                            });
-
-                            dialog.dismiss();
-                        }
-                        else{
-                            Toast.makeText(PrescriptionList.this, "Please input a Physician", Toast.LENGTH_SHORT).show();
-                        }
-
-
-                    }
-                });
-                */
             }
         });
 

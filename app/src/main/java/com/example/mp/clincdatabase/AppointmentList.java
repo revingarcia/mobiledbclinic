@@ -1,11 +1,13 @@
 package com.example.mp.clincdatabase;
 
 import android.content.Intent;
+import android.graphics.Canvas;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -39,6 +41,8 @@ public class AppointmentList extends AppCompatActivity {
     private DatabaseReference userDataReference;
 
     private Appointment schedulesTemp;
+
+    SwipeController swipeController = null;
 
     @Override
     public void onCreate(Bundle savedInstanceState){
@@ -106,6 +110,28 @@ public class AppointmentList extends AppCompatActivity {
 
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         mRecyclerView.setAdapter(mAdapter);
+
+        swipeController = new SwipeController(new SwipeControllerActions() {
+            @Override
+            public void onLeftClicked(int position) {
+                mAdapter.scheduleList.remove(position);
+                mAdapter.notifyItemRemoved(position);
+                mAdapter.notifyItemRangeChanged(position, mAdapter.getItemCount());
+
+                userDataReference = databaseReference.child("Users").child(user1);
+                userDataReference.child("appointments").setValue(mAdapter.scheduleList);
+            }
+        }, AppointmentList.this);
+
+        ItemTouchHelper itemTouchhelper = new ItemTouchHelper(swipeController);
+        itemTouchhelper.attachToRecyclerView(mRecyclerView);
+
+        mRecyclerView.addItemDecoration(new RecyclerView.ItemDecoration() {
+            @Override
+            public void onDraw(Canvas c, RecyclerView parent, RecyclerView.State state) {
+                swipeController.onDraw(c);
+            }
+        });
 
     }
 }

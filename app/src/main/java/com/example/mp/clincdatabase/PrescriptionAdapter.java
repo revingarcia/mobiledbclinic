@@ -32,7 +32,7 @@ import java.util.ArrayList;
 public class PrescriptionAdapter extends RecyclerView.Adapter<PrescriptionAdapter.ViewHolder> {
     @NonNull
 
-    private ArrayList<Records> prescriptionList;
+    public ArrayList<Records> prescriptionList;
     private String user;
     private Context context;
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -103,6 +103,7 @@ public class PrescriptionAdapter extends RecyclerView.Adapter<PrescriptionAdapte
         holder.setName(prescriptionList.get(position).getPhysician(), "Number of Prescriptions"+prescriptionList.get(position).getPrescriptions().size());
         final int pos = position;
         final String posString = Integer.toString(pos);
+
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -144,10 +145,6 @@ public class PrescriptionAdapter extends RecyclerView.Adapter<PrescriptionAdapte
                 // check if item still exists
                 if(pos != RecyclerView.NO_POSITION){
                     Records clickedDataItem = prescriptionList.get(pos);
-                    AlertDialog.Builder menuBuilder = new AlertDialog.Builder(context);
-                    View menuDialogView = LayoutInflater.from(context).inflate(R.layout.prescriptions_edit,null);
-                    final Button addPrescription = (Button) menuDialogView.findViewById(R.id.add_new_prescription);
-                    final Button alarmEdit = (Button) menuDialogView.findViewById(R.id.alarm_edit);
                             AlertDialog.Builder mBuilder = new AlertDialog.Builder(context);
                             View dialogView = LayoutInflater.from(context).inflate(R.layout.dialogadd_prescription, null);
                             final EditText addMed = (EditText) dialogView.findViewById(R.id.addMed);
@@ -163,19 +160,12 @@ public class PrescriptionAdapter extends RecyclerView.Adapter<PrescriptionAdapte
                             addPresLogin.setOnClickListener(new View.OnClickListener(){
                                 @Override
                                 public void onClick(View view){
-                                    /*
-                                    prescriptionList.get(pos).getPrescriptions().add(new Prescriptions(addMed.getText().toString(), adFrequency.getText().toString(),addCondition.getText().toString(), addNotes.getText().toString()));
+
+                                    prescriptionList.get(pos).getPrescriptions().add(new Prescriptions(addMed.getText().toString(), addCondition.getText().toString(), addNotes.getText().toString()));
                                     userDataReference = databaseReference.child("Users").child(user).child("records");
                                     userDataReference.setValue(prescriptionList);
-                                    */
+
                                     dialog.dismiss();
-                                    Intent intent = new Intent(context, PrescriptionAlarmAdd.class);
-                                    intent.putExtra("medicine", addMed.getText().toString());
-                                    intent.putExtra("condition", addCondition.getText().toString());
-                                    intent.putExtra("notes", addNotes.getText().toString());
-                                    intent.putExtra("username", user);
-                                    intent.putExtra("position", position);
-                                    context.startActivity(intent);
                                     notifyDataSetChanged();
                                 }
                             });
@@ -185,6 +175,7 @@ public class PrescriptionAdapter extends RecyclerView.Adapter<PrescriptionAdapte
                 return false;
             }
         });
+
     }
 
     @Override

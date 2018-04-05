@@ -32,6 +32,7 @@ public class Login extends AppCompatActivity{
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dialog_login);
+        getSupportActionBar().setTitle("Login");
 
         loginUser = (EditText) findViewById(R.id.loginUser);
         loginPass = (EditText) findViewById(R.id.loginPass);

@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 
 public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.ViewHolder> {
-    private ArrayList<Appointment> scheduleList;
+    public ArrayList<Appointment> scheduleList;
     private Context context;
     private String user;
 
@@ -53,8 +53,14 @@ public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.
 
     @Override
     public void onBindViewHolder(AppointmentAdapter.ViewHolder holder, int position) {
-        holder.setTexts("11/12/2039", "Appointment with" + scheduleList.get(position).getPhysician());
+        holder.setTexts(scheduleList.get(position).getDateDay() + "/" + scheduleList.get(position).getDateMonth() + "/" + scheduleList.get(position).getDateYear(), "Appointment with" + scheduleList.get(position).getPhysician());
 
+        holder.mView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
     }
 
 

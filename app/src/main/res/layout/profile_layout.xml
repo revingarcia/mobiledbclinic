@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#FFBF3636">
+
+    <ImageView
+        android:id="@+id/imageProfile"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginLeft="52dp"
+        android:layout_marginTop="44dp"
+        android:src="@drawable/user"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/profileName"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:layout_marginTop="84dp"
+        android:textColor="#fff"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.199"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageProfile"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textName"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="24dp"
+        android:gravity="center"
+        android:text="username: "
+        android:textColor="#fff"
+        android:textSize="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/imageProfile" />
+
+    <EditText
+        android:id="@+id/placeHolderName"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="40dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="4dp"
+        android:gravity="center"
+        android:text="HELP"
+        android:textColor="#fff"
+        android:textSize="20dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textName"
+        app:layout_constraintTop_toBottomOf="@id/profileName" />
+
+    <TextView
+        android:id="@+id/textBirthday"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_marginLeft="44dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="32dp"
+        android:gravity="center"
+        android:text="birthday: "
+        android:textColor="#fff"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toStartOf="@+id/editText2"
+        app:layout_constraintHorizontal_bias="0.313"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textName" />
+
+    <EditText
+        android:id="@+id/editText2"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="40dp"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:textColor="#fff"
+        android:textSize="20dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/placeHolderName" />
+
+    <TextView
+        android:id="@+id/textContact"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_marginTop="36dp"
+        android:gravity="center"
+        android:text="contact: "
+        android:textColor="#fff"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toStartOf="@+id/editText"
+        app:layout_constraintHorizontal_bias="0.344"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textBirthday" />
+
+    <EditText
+        android:id="@+id/editText"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="40dp"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:textColor="#fff"
+        android:textSize="20dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/editText2" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_marginStart="40dp"
+        android:gravity="center"
+        android:text="Allergies"
+        android:textColor="#fff"
+        app:layout_constraintBottom_toTopOf="@id/allergiesLayout"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textContact"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <LinearLayout
+        android:id="@+id/allergiesLayout"
+        android:layout_width="141dp"
+        android:layout_height="95dp"
+        android:layout_marginLeft="40dp"
+        app:layout_constraintBottom_toTopOf="@id/buttonsLayout"
+        app:layout_constraintLeft_toLeftOf="parent">
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_marginEnd="92dp"
+        android:gravity="center"
+        android:text="Pharmaceutical"
+        android:textColor="#fff"
+        app:layout_constraintBottom_toTopOf="@id/prescribedLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/editText"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <LinearLayout
+        android:id="@+id/prescribedLayout"
+        android:layout_width="141dp"
+        android:layout_height="95dp"
+        android:layout_marginRight="48dp"
+        app:layout_constraintBottom_toTopOf="@id/buttonsLayout"
+        app:layout_constraintRight_toRightOf="parent">
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/buttonsLayout"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginTop="24dp"
+        android:paddingBottom="10dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingTop="10dp"
+        android:weightSum="2"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <Button
+            android:id="@+id/backBtn2"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/mybutton"
+            android:text="Back" />
+
+        <Button
+            android:id="@+id/btnEdit2"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/mybutton"
+            android:text="Edit"
+            app:layout_constraintTop_toBottomOf="@+id/inputPhysicianAppointment" />
+
+
+    </LinearLayout>
+
+
+</android.support.constraint.ConstraintLayout>

@@ -46,6 +46,7 @@ public class AddAppointment extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.appointmentsched_list);
+        getSupportActionBar().setTitle("Make Appointment");
 
         Intent intent1 = getIntent();
         user1 = intent1.getStringExtra("username");
@@ -144,6 +145,7 @@ public class AddAppointment extends AppCompatActivity {
                     appointmentTemp.setAlarmData(alarmTemp);
                     scheduleList.add(appointmentTemp);
                     userDataReference.child("appointments").setValue(scheduleList);
+                    finish();
                 }
                 else
                     Toast.makeText(AddAppointment.this, "Please fill in the blank, do not leave anything blank", Toast.LENGTH_SHORT).show();

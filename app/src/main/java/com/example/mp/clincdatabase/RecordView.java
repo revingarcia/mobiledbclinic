@@ -5,6 +5,8 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
@@ -26,7 +28,10 @@ public class RecordView extends AppCompatActivity {
     private EditText prescript_name;
     private EditText prescript_contact;
     private EditText prescript_physician;
+    private EditText prescript_frequency;
     private TableLayout pres_tbl;
+    private Button btnBack;
+    private Button btnEdit;
 
     private Records recordTemp;
 
@@ -48,7 +53,11 @@ public class RecordView extends AppCompatActivity {
         prescript_name = (EditText) findViewById(R.id.prescript_name);
         prescript_contact = (EditText) findViewById(R.id.precrip_contact);
         prescript_physician = (EditText) findViewById(R.id.prescriped_physician);
-/*
+        prescript_frequency = (EditText) findViewById(R.id.btnFrequency);
+        btnBack = (Button) findViewById(R.id.btnBack1);
+        btnEdit = (Button) findViewById(R.id.btnEdit1);
+
+
         userDataReference = databaseReference.child("Users").child(user);
         userDataReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -58,7 +67,8 @@ public class RecordView extends AppCompatActivity {
                     prescript_name.setText(users1.getFname());
                     prescript_contact.setText(users1.getContact());
                     prescript_physician.setText(users1.getRecords().get(pos).getPhysician());
-                    //startTable(users1.getRecords().get(pos));
+                    prescript_frequency.setText(users1.getRecords().get(pos).getFrequency());
+                    startTable(users1.getRecords().get(pos));
                 }
             }
 
@@ -67,13 +77,25 @@ public class RecordView extends AppCompatActivity {
 
             }
         });
-        */
 
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
+        btnEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
 
 
 
     }
-/*
+
     public void startTable(Records record){
         TableLayout stk = (TableLayout) findViewById(R.id.table_prescriptino);
         TableRow tbrow0 = new TableRow(this);
@@ -85,10 +107,6 @@ public class RecordView extends AppCompatActivity {
         tv1.setText(" Frequency ");
         tv1.setTextColor(Color.WHITE);
         tbrow0.addView(tv1);
-        TextView tv2 = new TextView(this);
-        tv2.setText(" Condition ");
-        tv2.setTextColor(Color.WHITE);
-        tbrow0.addView(tv2);
         TextView tv3 = new TextView(this);
         tv3.setText(" Notes ");
         tv3.setTextColor(Color.WHITE);
@@ -105,13 +123,6 @@ public class RecordView extends AppCompatActivity {
             t1v.setGravity(Gravity.CENTER);
            // t1v.getLayoutParams().height = LinearLayout.LayoutParams.WRAP_CONTENT;
             tbrow.addView(t1v);
-            TextView t2v = new TextView(this);
-            t2v.setText(record.getPrescriptions().get(i).getFrequency());
-            t2v.setWidth(20);
-            //t2v.getLayoutParams().height = LinearLayout.LayoutParams.WRAP_CONTENT;
-            t2v.setTextColor(Color.WHITE);
-            t2v.setGravity(Gravity.CENTER);
-            tbrow.addView(t2v);
             TextView t3v = new TextView(this);
             t3v.setText(record.getPrescriptions().get(i).getConditions());
             t3v.setTextColor(Color.WHITE);
@@ -125,5 +136,5 @@ public class RecordView extends AppCompatActivity {
             stk.addView(tbrow);
         }
     }
-*/
+
 }

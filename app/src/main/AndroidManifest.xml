@@ -30,6 +30,7 @@
         <activity android:name=".RecordView" />
         <activity android:name=".PrescriptionAlarmAdd"/>
         <activity android:name=".AlarmNotif"/>
+        <activity android:name=".ProfileEdit"/>
         <!--  Declare  Alarm Broadcast receiver here  -->
         <receiver android:name=".AlarmReceiver" />
 

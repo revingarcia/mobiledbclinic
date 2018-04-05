@@ -1,9 +1,11 @@
 package com.example.mp.clincdatabase;
 
+import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper.Callback;
 import android.view.MotionEvent;
@@ -29,10 +31,13 @@ class SwipeController extends Callback {
 
     private SwipeControllerActions buttonsActions = null;
 
+    private Context context;
+
     private static final float buttonWidth = 300;
 
-    public SwipeController(SwipeControllerActions buttonsActions) {
+    public SwipeController(SwipeControllerActions buttonsActions, Context context) {
         this.buttonsActions = buttonsActions;
+        this.context = context;
     }
 
     @Override
@@ -154,21 +159,14 @@ class SwipeController extends Callback {
         Paint p = new Paint();
 
         RectF leftButton = new RectF(itemView.getLeft(), itemView.getTop(), itemView.getLeft() + buttonWidthWithoutPadding, itemView.getBottom());
-        p.setColor(Color.BLUE);
+        int color = ContextCompat.getColor(context, R.color.colorAccent);
+        p.setColor(color);
         c.drawRoundRect(leftButton, corners, corners, p);
-        drawText("EDIT", c, leftButton, p);
-
-        RectF rightButton = new RectF(itemView.getRight() - buttonWidthWithoutPadding, itemView.getTop(), itemView.getRight(), itemView.getBottom());
-        p.setColor(Color.RED);
-        c.drawRoundRect(rightButton, corners, corners, p);
-        drawText("DELETE", c, rightButton, p);
+        drawText("DELETE", c, leftButton, p);
 
         buttonInstance = null;
         if (buttonShowedState == ButtonsState.LEFT_VISIBLE) {
             buttonInstance = leftButton;
-        }
-        else if (buttonShowedState == ButtonsState.RIGHT_VISIBLE) {
-            buttonInstance = rightButton;
         }
     }
 
